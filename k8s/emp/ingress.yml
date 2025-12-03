@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: emp-ingress
+  namespace: developer
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /emp
+            pathType: Prefix
+            backend:
+              service:
+                name: emp-service
+                port:
+                  number: 80
