@@ -49,4 +49,72 @@ public class EmployeeServiceRestController {
                     .body("Department service down");
         }
     }
+    @GetMapping("/whoami")
+public ResponseEntity<String> whoami() {
+    return ResponseEntity.ok("employee-service");
+}
+@GetMapping("/departments/slow")
+public ResponseEntity<?> callSlowDept(
+        @RequestHeader(value="Authorization", required=false) String authHeader) {
+
+    if (isUnauthorized(authHeader)) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+    }
+
+    return ResponseEntity.ok(
+        restTemplate.getForObject(
+            "http://department-service:8080/departments/slow",
+            String.class
+        )
+    );
+}
+
+@GetMapping("/departments/error")
+public ResponseEntity<?> callErrorDept(
+        @RequestHeader(value="Authorization", required=false) String authHeader) {
+
+    if (isUnauthorized(authHeader)) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+    }
+
+    return ResponseEntity.ok(
+        restTemplate.getForObject(
+            "http://department-service:8080/departments/error",
+            String.class
+        )
+    );
+}
+@GetMapping("/departments/slow")
+public ResponseEntity<?> callSlowDept(
+        @RequestHeader(value="Authorization", required=false) String authHeader) {
+
+    if (isUnauthorized(authHeader)) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+    }
+
+    return ResponseEntity.ok(
+        restTemplate.getForObject(
+            "http://department-service:8080/departments/slow",
+            String.class
+        )
+    );
+}
+
+@GetMapping("/departments/error")
+public ResponseEntity<?> callErrorDept(
+        @RequestHeader(value="Authorization", required=false) String authHeader) {
+
+    if (isUnauthorized(authHeader)) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+    }
+
+    return ResponseEntity.ok(
+        restTemplate.getForObject(
+            "http://department-service:8080/departments/error",
+            String.class
+        )
+    );
+}
+
+    
 }
