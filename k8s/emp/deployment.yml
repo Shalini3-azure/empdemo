@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment
+  name: emp-deployment
   namespace: developer
 spec:
   replicas: 1
